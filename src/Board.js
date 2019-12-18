@@ -111,7 +111,22 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      //count variable = 0
+      let count = 0;
+      //iterate through matrix to get numbers at colIndex
+      for (let i = 0; i < this.attributes.n; i++) {
+        let col = this.get(i)[colIndex];
+        //if @i = 1 count ++
+        if (col === 1) {
+          count++;
+        }
+        //if count > 1; return true
+        if (count > 1) {
+          return true;
+        }
+      }
+      //else return false;
+      return false;
     },
 
     // test if any columns on this board contain conflicts
