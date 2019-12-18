@@ -79,12 +79,24 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      //use reduce to get sum of row
+      //if sum of the rowindex array > 0 return true;
+
+      var sum = board.get(rowIndex).reduce((acc, current) =>
+        acc + current);
+
+      if (sum > 0) {
+        return true;
+      } else {
+        return false;
+      }
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+
+      //iterate through all rows
+      //if any return true, return true for function;
     },
 
 
