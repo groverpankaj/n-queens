@@ -145,12 +145,39 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      //sum variable
+      let sum = 0;
+      //@row
+      let row = 0;
+
+      let num = this.attributes.n;
+      // iterate
+      // start at i = index given, go until n - 1, i++
+      for (let i = majorDiagonalColumnIndexAtFirstRow; i < num; i++) {
+        //sum +=
+        if (i >= 0 && row < num) {
+          sum += this.get(row)[i];
+        }
+        //row++
+        row++;
+      }
+      return (sum > 1);
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+      //iterate through matrix
+      //iterate through matrix starting at n - 1;
+      let n = this.attributes.n;
+
+      for (let i = (1 - n); i < n; i++) {
+        if (this.hasMajorDiagonalConflictAt(i)) {
+          //if true, return true;
+          return true;
+        }
+      }
+      //return false
+      return false;
     },
 
 
