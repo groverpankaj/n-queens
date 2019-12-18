@@ -84,7 +84,7 @@
       var sum = this.get(rowIndex).reduce((acc, current) =>
         acc + current);
 
-      if (sum > 0) {
+      if (sum > 1) {
         return true;
       } else {
         return false;
@@ -120,18 +120,22 @@
         if (col === 1) {
           count++;
         }
-        //if count > 1; return true
-        if (count > 1) {
-          return true;
-        }
       }
       //else return false;
-      return false;
+      return (count > 1);
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+      //iterate through columns
+      for (let i = 0; i < this.attributes.n; i++) {
+        if (this.hasColConflictAt(i)) {
+          //if any return true, return true
+          return true;
+        }
+      }
+      //return false
+      return false;
     },
 
 
