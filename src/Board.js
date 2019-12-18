@@ -62,7 +62,7 @@
     },
 
 
-/*
+    /*
          _             _     _
      ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
     / __| __/ _` | '__| __| | '_ \ / _ \ '__/ _ (_)
@@ -81,8 +81,7 @@
     hasRowConflictAt: function(rowIndex) {
       //use reduce to get sum of row
       //if sum of the rowindex array > 0 return true;
-
-      var sum = board.get(rowIndex).reduce((acc, current) =>
+      var sum = this.get(rowIndex).reduce((acc, current) =>
         acc + current);
 
       if (sum > 0) {
@@ -94,9 +93,15 @@
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-
       //iterate through all rows
-      //if any return true, return true for function;
+      for (let i = 0; i < this.attributes.n; i++) {
+        //if any return true, return true for function;
+        //i is the row we are testing on 'this' board.
+        if (this.hasRowConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     },
 
 
