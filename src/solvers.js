@@ -16,7 +16,7 @@
 window.findNRooksSolution = function(n) {
 
   // n =4;
-  var board = new Board({n:n});
+  var board = new Board({n: n});
 
   console.log(board.attributes);
 
@@ -59,7 +59,7 @@ window.countNRooksSolutions = function(n) {
   //count for number of solutions
   var solutionCount = 0;
   //new board
-  var board = new Board({n:n});
+  var board = new Board({n: n});
 
   //recurse function takes in (row)
   //recurse when no conflicts
@@ -68,13 +68,25 @@ window.countNRooksSolutions = function(n) {
     for (let i = 0; i < n; i++) {
       // toggle number
       board.togglePiece(i);
-      //if no rows/column conflict
-        //if row = n - 1 add to count and break;
-        //else recurse through next row (row++);
+
+      //if no rows/column conflict with board
+      if (board.hasAnyRowConflicts && board.hasAnyColConflicts) {
+        //  if row = n - 1 add to count and break;
+        if (row === n - 1) {
+          solutionCount++;
+          break;
+        } else {
+          recurse(board.get(row++));
+        }
+        //  else recurse through next row (row++);
+
+      }
+
       board.togglePiece(i);
       //toggle number;
     }
   };
+
   //recurse first row of board
   recurse(board.get(0));
 
