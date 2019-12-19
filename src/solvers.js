@@ -92,7 +92,7 @@ window.countNRooksSolutions = function(n) {
       board.togglePiece(currentRow, i);
 
       //if i = n - 1, current --
-      if (i = n - 1) {
+      if (i === n - 1) {
         currentRow--;
       }
     }
