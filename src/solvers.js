@@ -67,7 +67,7 @@ window.countNRooksSolutions = function(n) {
     //for loop through rows
     for (let i = 0; i < n; i++) {
       // toggle number
-      board.togglePiece(i);
+      board.togglePiece(row, i);
 
       //if no rows/column conflict with board
       if (board.hasAnyRowConflicts && board.hasAnyColConflicts) {
