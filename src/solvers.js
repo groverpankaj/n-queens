@@ -13,9 +13,41 @@
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n rooks placed such that none of them can attack each other
 
+window.findNRooksSolution = function(n) {
 
+  // n =4;
+  var board = new Board({n:n});
+
+  console.log(board.attributes);
+
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      board.get(i)[j] = 1;
+      if (board.hasColConflictAt(j) === false) {
+        break;
+      }
+      board.get(i)[j] = 0;
+    }
+  }
+
+  // console.log(board.attributes);
+
+  var solution = []; // fixme
+
+  for (let currKey in board.attributes) {
+    if (Array.isArray(board.attributes[currKey])) {
+      solution.push(board.attributes[currKey]);
+    }
+  }
+
+  // console.log(solution);
+
+  console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
+  return solution;
+};
 
 window.findNRooksSolution = function(n) {
+
   var solution = undefined; //fixme
 
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
@@ -24,7 +56,29 @@ window.findNRooksSolution = function(n) {
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
 window.countNRooksSolutions = function(n) {
-  var solutionCount = undefined; //fixme
+  //count for number of solutions
+  var solutionCount = 0;
+  //new board
+  var board = new Board({n:n});
+
+  //recurse function takes in (row)
+  //recurse when no conflicts
+  const recurse = (row) => {
+    //for loop through rows
+    for (let i = 0; i < n; i++) {
+      // toggle number
+      board.togglePiece(i);
+      //if no rows/column conflict
+        //if row = n - 1 add to count and break;
+        //else recurse through next row (row++);
+      board.togglePiece(i);
+      //toggle number;
+    }
+  };
+  //recurse first row of board
+  recurse(board.get(0));
+
+
 
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;
