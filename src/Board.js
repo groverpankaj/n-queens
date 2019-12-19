@@ -187,12 +187,37 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      //sum variable
+      let sum = 0;
+      //@row
+      let row = 0;
+
+      let num = this.attributes.n;
+      // iterate
+      // start at i = index given, go until 0, i--
+      for (let i = minorDiagonalColumnIndexAtFirstRow; i >= 0; i--) {
+        //sum +=
+        if (i <= num - 1 && row < num) {
+          sum += this.get(row)[i];
+        }
+        //row++
+        row++;
+      }
+      return (sum > 1);
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
+      let n = this.attributes.n;
+
+      for (let i = 0; i < 2 * (n - 1); i++) {
+        if (this.hasMinorDiagonalConflictAt(i)) {
+          //if true, return true;
+          return true;
+        }
+      }
+      //return false
+      return false;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
