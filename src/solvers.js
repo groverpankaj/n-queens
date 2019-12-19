@@ -66,6 +66,7 @@ window.countNRooksSolutions = function(n) {
   //recurse function takes in (row)
   //recurse when no conflicts
   const recurse = (boardRow) => {
+
     //for loop through rows
     for (let i = 0; i < n; i++) {
       // toggle number
@@ -73,6 +74,7 @@ window.countNRooksSolutions = function(n) {
 
       //if no rows/column conflict with board
       if (board.hasAnyRowConflicts && board.hasAnyColConflicts) {
+
         //  if row = n - 1 add to count and break;
         if (currentRow === n - 1) {
           solutionCount++;
@@ -85,11 +87,11 @@ window.countNRooksSolutions = function(n) {
           currentRow++;
           recurse(board.get(currentRow));
         }
-
       }
-
-      board.togglePiece(currentRow, i);
       //toggle number;
+      board.togglePiece(currentRow, i);
+
+      //if i = n - 1, current --
     }
   };
 
