@@ -73,7 +73,7 @@ window.countNRooksSolutions = function(n) {
       board.togglePiece(currentRow, i);
 
       //if no rows/column conflict with board
-      if (board.hasAnyRowConflicts && board.hasAnyColConflicts) {
+      if (!board.hasAnyRowConflicts() && !board.hasAnyColConflicts()) {
 
         //  if row = n - 1 add to count and break;
         if (currentRow === n - 1) {
