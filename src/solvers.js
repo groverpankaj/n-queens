@@ -60,12 +60,9 @@ window.countNRooksSolutions = function(n) {
   var solutionCount = 0;
   //new board
   var board = new Board({n: n});
-
-  var currentRow = 0;
-
   //recurse function takes in (row)
   //recurse when no conflicts
-  const recurse = (boardRow) => {
+  const recurse = (boardRow, currentRow) => {
 
     //for loop through rows
     for (let i = 0; i < n; i++) {
@@ -73,33 +70,30 @@ window.countNRooksSolutions = function(n) {
       board.togglePiece(currentRow, i);
 
       //if no rows/column conflict with board
-      if (!board.hasAnyRowConflicts() && !board.hasAnyColConflicts()) {
+      if (!board.hasAnyColConflicts()) {
 
         //  if row = n - 1 add to count and break;
         if (currentRow === n - 1) {
           solutionCount++;
           //go back into previous row
+          board.togglePiece(currentRow, i);
           currentRow--;
           break;
         } else {
           //  else recurse through next row (row++);
           //go to next row
           currentRow++;
-          recurse(board.get(currentRow));
+          recurse(board.get(currentRow), currentRow);
+          currentRow--;
         }
       }
       //toggle number;
       board.togglePiece(currentRow, i);
-
-      //if i = n - 1, current --
-      if (i === n - 1) {
-        currentRow--;
-      }
     }
   };
 
   //recurse first row of board
-  recurse(board.get(currentRow));
+  recurse(board.get(0), 0);
 
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;
@@ -115,7 +109,13 @@ window.findNQueensSolution = function(n) {
 
 // return the number of nxn chessboards that exist, with n queens placed such that none of them can attack each other
 window.countNQueensSolutions = function(n) {
-  var solutionCount = undefined; //fixme
+  //solution count
+  var solutionCount = 0;
+  //create board
+  let board = new Board({n: n});
+
+  //
+
 
   console.log('Number of solutions for ' + n + ' queens:', solutionCount);
   return solutionCount;
